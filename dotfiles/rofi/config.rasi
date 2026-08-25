@@ -1,0 +1,85 @@
+/* Fonts and colors*/
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "breeze-dark";
+    font: "Noto Sans 12";
+    display-drun: "  Apps";
+    display-run: "  Run";
+    display-window: "  Windows";
+}
+
+* {
+    bg-base: rgba(20, 10, 10, 0.85);
+    bg-selected: linear-gradient(to right, #8c2020, #d9531e); 
+    bg-input: #3b1818;
+    
+    fg-main: #fcedd9;
+    fg-selected: #ffffff;
+    
+    border-accent: #8c2020;
+    
+    background-color: transparent;
+    text-color: @fg-main;
+}
+
+/* Rofi's main window */
+window {
+    width: 600px;
+    background-color: @bg-base;
+    border: 2px solid;
+    border-color: @border-accent;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+/* search bar */
+mainbox {
+    spacing: 15px;
+}
+
+inputbar {
+    background-color: @bg-input;
+    border-radius: 12px;
+    padding: 12px 16px;
+    spacing: 10px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: #f9e2af;
+    font: "Noto Sans Bold 12";
+}
+
+entry {
+    placeholder: "Type to search...";
+    placeholder-color: rgba(252, 237, 217, 0.4);
+}
+
+/* App list */
+listview {
+    columns: 2;
+    lines: 7;
+    spacing: 8px;
+    scrollbar: false;
+    border: none;
+}
+
+element {
+    padding: 10px;
+    border-radius: 10px;
+    spacing: 12px;
+}
+
+element-icon {
+    size: 28px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
+
+element selected {
+    background-image: @bg-selected;
+    text-color: @fg-selected;
+}

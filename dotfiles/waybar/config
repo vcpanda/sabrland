@@ -1,0 +1,184 @@
+//──────────────────────────────────────────────────────────────────────────
+// Experimental test
+// Waybar config
+// Version 1.0.0 alpha
+//──────────────────────────────────────────────────────────────────────────
+
+{
+ "layer": "top",
+  "position": "top",
+  "margin-top": 12,
+  "margin-bottom": -8,
+  "height": 34,
+
+// Modules layout
+"modules-left": [
+    "clock",
+    "custom/power",
+    "network",
+    "bluetooth",
+    "custom/microphone"
+  ],
+
+"modules-center": [
+    "custom/workspace-1",
+    "custom/workspace-2",
+    "custom/workspace-3",
+    "custom/workspace-4"
+  ],
+
+"modules-right": [
+    "battery",
+    "custom/volume",
+    "custom/brightness"
+  ],
+
+// Clock
+"clock": {
+    "format": " {:%H:%M}",
+    "format-alt": " {:%d.%m.%Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+},
+
+// Network
+"network": {
+"format-wifi": "{icon}",
+    "format-icons": ["[ 󰤯 ]", "[ 󰤟 ]", "[ 󰤢 ]", "[ 󰤥 ]", "[ 󰤨 ]"],
+    "format-alt": "󱛇",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "nm-connection-editor",
+    "interval": 5,
+    "nospacing": 1
+},
+
+// Keyboard
+"keyboard-state": {
+    "numlock": true,
+    "capslock": true,
+    "format": " {layout}"
+  },
+
+// Bluetooth
+"bluetooth": {
+    "format": "{icon}",
+    "format-icons": {
+      "enabled": "[  ]",
+      "disabled": "[ 󰂲 ]"
+    },
+    "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
+    "tooltip-format": "Bluetooth is {status}",
+    "interval": 5
+  },
+
+// Battery
+"battery": {
+    "format": "{icon}  {capacity}%",
+    "format-icons": {
+      "charging": [
+        "󰢜","󰂆","󰂇","󰂈","󰢝","󰂉","󰢞","󰂊","󰂋","󰂅"
+      ],
+      "default": [
+        "󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"
+      ]
+    },
+    "format-full": "Charged ",
+    "interval": 5,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "tooltip": true
+  },
+
+// Microphone
+"custom/microphone": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/mic.sh",
+    "interval": "once",
+    "signal": 9,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && pkill -RTMIN+9 waybar"
+},
+
+// Brightness
+"custom/brightness": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/brightness.sh",
+    "interval": "once",
+    "signal": 10,
+    "on-scroll-up": "brightnessctl set +5% && pkill -RTMIN+10 waybar",
+    "on-scroll-down": "brightnessctl set 5%- && pkill -RTMIN+10 waybar",
+    "tooltip": true
+},
+
+"backlight": {
+    "format": "󰛨  {percent}%",
+    "format-icons": ["󰃞","󰃟","󰃠","󰃝","󰃜","󰃛"],
+    "class": "flicker-bar",
+    "on-click": "~/.config/waybar/scripts/brightness-slider.sh"
+  },
+
+// Workspace
+"custom/workspace-1": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/arch-workspace.sh 1",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "bash -c 'hyprctl dispatch workspace 1'",
+    "tooltip": false
+  },
+  "custom/workspace-2": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/arch-workspace.sh 2",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "bash -c 'hyprctl dispatch workspace 2'",
+    "tooltip": false
+  },
+  "custom/workspace-3": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/arch-workspace.sh 3",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "bash -c 'hyprctl dispatch workspace 3'",
+    "tooltip": false
+  },
+  "custom/workspace-4": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/arch-workspace.sh 4",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "bash -c 'hyprctl dispatch workspace 4'",
+    "tooltip": false
+  },
+
+// Volume
+"custom/volume": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": "once",
+    "signal": 8,
+    "exec": "~/.config/waybar/scripts/volume.sh",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && pkill -RTMIN+8 waybar",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+ && pkill -RTMIN+8 waybar",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && pkill -RTMIN+8 waybar",
+    "tooltip": true
+},
+
+// Power
+"custom/power": {
+    "format": "[ 󰤆 ]",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    "on-click": "~/.config/waybar/scripts/powermenu.sh"
+  },
+
+// Spacer
+"custom/squares": {
+    "format": " ",
+    "tooltip": false
+  }
+}

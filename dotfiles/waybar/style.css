@@ -1,0 +1,79 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Noto Sans", "FiraCode Nerd Font", monospace;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(20, 10, 10, 0.85); 
+    color: #fcedd9;
+}
+
+#clock, #network, #bluetooth, #battery, #backlight,
+#custom-microphone, #custom-volume, #custom-brightness, #custom-power {
+    background: linear-gradient(135deg, #3b1212 0%, #7a1c1c 100%);
+    color: #fcedd9;
+    border-radius: 12px;
+    padding: 2px 14px;
+    margin: 6px 4px;
+}
+
+#battery {
+    color: #a6e3a1;
+}
+#battery.charging {
+    color: #f9e2af;
+}
+#battery.warning:not(.charging) {
+    color: #fab387;
+}
+#battery.critical:not(.charging) {
+    color: #f38ba8;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f38ba8;
+        color: #1e1e2e;
+    }
+}
+
+#custom-workspace-1, #custom-workspace-2, #custom-workspace-3, #custom-workspace-4 {
+    padding: 2px 8px;
+    margin: 6px 2px;
+    background-color: transparent;
+    color: #cdd6f4;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#custom-workspace-1:hover, #custom-workspace-2:hover, 
+#custom-workspace-3:hover, #custom-workspace-4:hover {
+    background: linear-gradient(135deg, #8c2020 0%, #d9531e 100%);
+    box-shadow: 0px 0px 8px rgba(255, 120, 50, 0.6);
+}
+
+#clock {
+    color: #f9e2af;
+    font-weight: bold;
+}
+
+tooltip {
+    background: rgba(20, 10, 10, 0.95);
+    border: 1px solid #8c2020;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+tooltip label {
+    color: #fcedd9;
+    font-family: "Noto Sans", "FiraCode Nerd Font", monospace;
+    padding: 6px 10px;
+}
